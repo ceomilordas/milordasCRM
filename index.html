@@ -1,1 +1,135 @@
-12312431
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .pp {
+            background: #f43;
+        }
+    </style>
+</head>
+
+<body>
+    <select id="one"></select>
+    <select id="two"></select>
+    <select id="three"></select>
+    <my-example>
+        <div>
+            <input type="text" v-model="inputMessage" class="pp" @keyup="addA()">
+            <a @click="addItem()">Готово</a>
+            <span>{{d}}</span>
+            <a id="ashka"></a>
+        </div>
+        <div>
+            <div v-for="item in list">
+                <span @click="hide(item)" v-if="!item.hide">{{item.name}}</span>
+                <span @click="show(item)">{{item.value}}</span>
+            </div>
+        </div>
+    </my-example>
+    <script>
+        let presets = {
+            el: "my-example",
+            data: {
+                inputMessage: "",
+                list: [],
+                a: 5,
+                c: 8
+            },
+            computed: {
+                d: function() {
+                    return this.a + this.c;
+                }
+            },
+            methods: {
+                addA: function() {
+                    this.a++;
+                },
+                addItem: function() {
+                    this.list.push({
+                        name: this.inputMessage,
+                        value: Math.random(),
+                        hide: false
+                    });
+                    console.log(this.list);
+                },
+                hide: function(item) {
+                    item.hide = true
+                },
+                show: function(item) {
+                    item.hide = false
+                }
+            },
+            created: function() {
+
+            },
+            mounted: function() {
+
+                let object = {
+                    value: 5,
+                    get: function(id) {
+                        return document.getElementById(id);
+                    },
+                    ls: function(data) {
+                        return localStorage.getItem(data);
+                    }
+                };
+
+                let select = function() {
+                    this.object;
+                    let that = this;
+                    this.load = function() {
+
+                    };
+                    this.update = function() {
+
+                    };
+                    this.init = function(obj) {
+                        that.object = obj;
+                    };
+                }
+
+                select.object
+
+                let one = new select();
+                one.init(object.get("one"));
+
+                console.log(one.object);
+
+                let two = new select();
+                two.init(object.get("two"));
+
+                two.clear = function() {
+
+                }
+
+                two.prototype.clear = function() {
+
+                }
+
+                console.log(two.object);
+
+                let three = new select();
+                three.init(object.get("three"));
+
+                console.log(three.object);
+
+                console.log(object.ls("name"));
+
+                let ashka = object.get("ashka");
+                ashka.innerHTML = "ППППППП";
+            },
+            destroyed: function() {
+
+            }
+        };
+        let myEx = new Vue(presets);
+    </script>
+</body>
+
+</html>
